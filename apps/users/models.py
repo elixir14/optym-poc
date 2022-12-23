@@ -9,14 +9,14 @@ from optym_poc.core.exceptions import OptymHTTPException
 
 
 class User(Base):
-    first_name = Column(String, nullable=False)
-    last_name = Column(String, nullable=False)
+    first_name = Column(String(128), nullable=False)
+    last_name = Column(String(128), nullable=False)
     gender = Column(Enum(Gender), nullable=True)
     email = Column(EmailType, nullable=False, unique=True)
-    mobile = Column(String, nullable=False, unique=False)
+    mobile = Column(String(128), nullable=False, unique=False)
     is_active = Column(Boolean, default=True)
-    profile_image = Column(String, nullable=True)
-    address = Column(String, nullable=True)
+    profile_image = Column(String(255), nullable=True)
+    address = Column(String(512), nullable=True)
     dob = Column(Date, nullable=True)
     full_name = column_property(first_name + " " + last_name)
 

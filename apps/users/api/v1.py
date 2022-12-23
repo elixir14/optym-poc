@@ -36,13 +36,13 @@ def create_user(payload: CreateUserSchema, db: Session = Depends(get_db)):
 
 
 @user_router.get("/{id}")
-async def get_users(id: str, db: Session = Depends(get_db)):
+async def get_user(id: str, db: Session = Depends(get_db)):
     user = user_action.get(db=db, id=id)
     return user
 
 
 @user_router.put("/{id}")
-async def get_users(id: str, payload: UpdateUserSchema, db: Session = Depends(get_db)):
+async def update_user(id: str, payload: UpdateUserSchema, db: Session = Depends(get_db)):
     logger.info(f"Update user for '{id}'")
     user_instance = db.query(User).filter(User.id == id).first()
     user = user_action.update(db=db, db_obj=user_instance, obj_in=payload)
@@ -51,7 +51,7 @@ async def get_users(id: str, payload: UpdateUserSchema, db: Session = Depends(ge
 
 
 @user_router.delete("/{id}")
-async def get_users(id: str, db: Session = Depends(get_db)):
+async def delete_user(id: str, db: Session = Depends(get_db)):
     logger.info(f"Delete user for '{id}'")
     user_action.remove(db=db, id=id)
     logger.info(f"User '{id}' deleted successfully.")
