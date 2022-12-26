@@ -1,4 +1,5 @@
 import logging
+import time
 import uuid
 from contextvars import ContextVar
 
@@ -48,6 +49,7 @@ async def generic_exception_handler(request: Request, exc: Exception):
 
 @app.middleware("http")
 async def request_middleware(request, call_next):
+    start_time = time.time()
     request_id = str(uuid.uuid4())
     request_url = str(request.url)
     request_id_contextvar.set(request_id)
@@ -70,7 +72,11 @@ async def request_middleware(request, call_next):
         logger.error(f"Request failed: {ex}")
         raise
     finally:
-        logger.info(f"Request Ended, Method:{request_method}, URL: {request_url}")
+        logger.info(
+            "Request Ended, Method:{0}, URL: {1}, Execution time: {2} seconds".format(
+                request_method, request_url, time.time() - start_time
+            )
+        )
 
 
 @app.on_event("startup")

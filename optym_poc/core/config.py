@@ -10,17 +10,11 @@ class Settings(BaseSettings):
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
     DATABASE_TYPE: str = "postgresql"
 
-    POSTGRES_USER: str
-    POSTGRES_PASSWORD: str
-    POSTGRES_HOST: str
-    POSTGRES_DB: str
-    POSTGRES_PORT: int = 5432
-
-    MYSQL_USER: str
-    MYSQL_PASSWORD: str
-    MYSQL_HOST: str
-    MYSQL_DB: str
-    MYSQL_PORT: int = 5432
+    DATABASE_USER: str
+    DATABASE_PASSWORD: str
+    DATABASE_HOST: str
+    DATABASE_DB: str
+    DATABASE_PORT: int = 5432
 
     DATABASE_URI: Optional[str] = None
 
@@ -39,16 +33,16 @@ class Settings(BaseSettings):
                 return v
             return PostgresDsn.build(
                 scheme="postgresql",
-                user=values.get("POSTGRES_USER"),
-                password=values.get("POSTGRES_PASSWORD"),
-                host=values.get("POSTGRES_HOST"),
-                path=f"/{values.get('POSTGRES_DB') or ''}",
+                user=values.get("DATABASE_USER"),
+                password=values.get("DATABASE_PASSWORD"),
+                host=values.get("DATABASE_HOST"),
+                path=f"/{values.get('DATABASE_DB') or ''}",
             )
         return "mysql+pymysql://{0}:{1}@{2}/{3}".format(
-            values.get("MYSQL_USER"),
-            quote(values.get("MYSQL_PASSWORD")),
-            values.get("MYSQL_HOST"),
-            values.get('MYSQL_DB')
+            values.get("DATABASE_USER"),
+            quote(values.get("DATABASE_PASSWORD")),
+            values.get("DATABASE_HOST"),
+            values.get('DATABASE_DB')
         )
 
     class Config:
