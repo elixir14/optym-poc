@@ -8,7 +8,7 @@ from requests import Request
 from starlette.responses import JSONResponse
 from starlette.routing import Match
 
-from apps.users.api.v1 import user_router
+from apps.loads.api.v1 import load_router
 from optym_poc.core.config import settings
 from optym_poc.core.logs import setup_logging
 
@@ -78,4 +78,4 @@ async def startup_event():
     setup_logging()
 
 
-app.include_router(user_router)
+app.include_router(load_router)

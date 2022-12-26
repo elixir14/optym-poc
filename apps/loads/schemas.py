@@ -1,0 +1,97 @@
+import uuid
+from typing import Optional
+
+from db.schemas import BaseModel
+
+
+class CreateLoadsSchema(BaseModel):
+    load_id: str
+    load_creation_date_time: str
+    business_unit: str
+    load_reference_number: Optional[str]
+    customer_id: str
+    fuel_surcharge: Optional[str]
+    additional_charge: Optional[str]
+    number_of_stops: str
+    total_loaded_miles: str
+    last_segment_miles: Optional[str]
+    pickup_appointment_start_date_time: str
+    pickup_appointment_end_date_time: Optional[str]
+    delivery_appointment_start_date_time: str
+    delivery_appointment_end_date_time: Optional[str]
+    required_equipment: str
+    hazmat: str
+    commodity_type: Optional[str]
+    load_max_weight: Optional[str]
+    critical: str
+    load_status: str
+    pickup_status: str
+    delivery_status: str
+    pickup_arrival_actual_date_time: Optional[str]
+    delivery_arrival_actual_date_time: Optional[str]
+    scenario_id: str
+    load_total_revenue: Optional[str]
+    linehaul_revenue: Optional[str]
+    pickup_location_id: str
+    delivery_location_id: str
+    active: Optional[bool]
+    associated_trip_ids: Optional[str]
+    pickup_departure_actual_date_time: Optional[str]
+    delivery_departure_actual_date_time: Optional[str]
+    run_id: str
+    timeoff: str
+    type: str
+    assigned_driver_id: Optional[str]
+    load_weight_on_last_segment: Optional[str]
+    pickup_arrival_eta: Optional[str]
+    pickup_departure_etd: Optional[str]
+    delivery_arrival_eta: Optional[str]
+    delivery_departure_etd: Optional[str]
+    trip_sequence: Optional[str]
+
+
+class LoadsSchema(BaseModel):
+    load_data_id: uuid.UUID
+    load_id: str
+    load_creation_date_time: str
+    business_unit: str
+    load_reference_number: Optional[str]
+    customer_id: str
+    fuel_surcharge: Optional[str]
+    additional_charge: Optional[str]
+    number_of_stops: str
+    total_loaded_miles: str
+    last_segment_miles: Optional[str]
+    pickup_appointment_start_date_time: str
+    pickup_appointment_end_date_time: Optional[str]
+    delivery_appointment_start_date_time: str
+    delivery_appointment_end_date_time: Optional[str]
+    required_equipment: str
+    hazmat: str
+    commodity_type: Optional[str]
+    load_max_weight: Optional[str]
+    critical: str
+    load_status: str
+    pickup_status: str
+    delivery_status: str
+    pickup_arrival_actual_date_time: Optional[str]
+    delivery_arrival_actual_date_time: Optional[str]
+    scenario_id: str
+    load_total_revenue: Optional[str]
+    linehaul_revenue: Optional[str]
+    pickup_location_id: str
+    delivery_location_id: str
+    active: Optional[bool]
+    associated_trip_ids: Optional[str]
+    pickup_departure_actual_date_time: Optional[str]
+    delivery_departure_actual_date_time: Optional[str]
+    run_id: str
+    timeoff: str
+    type: str
+    assigned_driver_id: Optional[str]
+    load_weight_on_last_segment: Optional[str]
+    pickup_arrival_eta: Optional[str]
+    pickup_departure_etd: Optional[str]
+    delivery_arrival_eta: Optional[str]
+    delivery_departure_etd: Optional[str]
+    trip_sequence: Optional[str]

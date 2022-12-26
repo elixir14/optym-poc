@@ -1,4 +1,4 @@
 from db import base
-from apps.users import models
+from apps.loads import models
 
 

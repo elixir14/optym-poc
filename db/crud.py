@@ -23,7 +23,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         self.model = model
 
     def get(self, db: Session, id: Any) -> Optional[ModelType]:
-        obj = db.query(self.model).filter(self.model.id == id).first()
+        obj = db.query(self.model).get(id)
         if not obj:
             raise OptymHTTPException(
                 detail=f"{self.model.__tablename__} {id} not found",
@@ -52,12 +52,6 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             db_obj: ModelType,
             obj_in: Union[UpdateSchemaType, Dict[str, Any]]
     ) -> ModelType:
-        if not db_obj:
-            raise OptymHTTPException(
-                detail=f"{self.model.__tablename__} not found",
-                status_code=status.HTTP_404_NOT_FOUND,
-                error_code=-1
-            )
         obj_data = jsonable_encoder(db_obj)
         if isinstance(obj_in, dict):
             update_data = obj_in
