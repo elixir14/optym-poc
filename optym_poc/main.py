@@ -1,5 +1,6 @@
 import logging
 import uuid
+import time
 from contextvars import ContextVar
 
 from fastapi import FastAPI
@@ -52,6 +53,7 @@ async def request_middleware(request, call_next):
     request_url = str(request.url)
     request_id_contextvar.set(request_id)
     request_method = request.method
+    start_time = time.time()
     logger.info(f"Request started, Method:{request_method}, URL: {request_url}")
     routes = request.app.router.routes
     logger.debug("Request Params:")
@@ -70,6 +72,7 @@ async def request_middleware(request, call_next):
         logger.error(f"Request failed: {ex}")
         raise
     finally:
+        logger.info("Time took to process the request and return response is {} sec".format(time.time() - start_time))
         logger.info(f"Request Ended, Method:{request_method}, URL: {request_url}")
 
 
