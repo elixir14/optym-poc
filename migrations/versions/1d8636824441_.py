@@ -64,7 +64,7 @@ def upgrade() -> None:
     ),
     sa.Column('pickup_departure_actual_date_time', sa.String(length=255), nullable=True),
     sa.Column('delivery_departure_actual_date_time', sa.String(length=255), nullable=True),
-    sa.Column('run_id', sa.String(length=255), nullable=False),
+    sa.Column('run_data_id', sa.String(length=255), nullable=False),
     sa.Column('timeoff', sa.String(length=255), nullable=False),
     sa.Column('type', sa.String(length=255), nullable=False),
     sa.Column('assigned_driver_id', sa.String(length=255), nullable=True),

@@ -29,14 +29,16 @@ class Settings(BaseSettings):
     @validator("DATABASE_URI", pre=True)
     def assemble_db_connection(cls, v: Optional[str], values: Dict[str, Any]) -> Any:
         if values.get("DATABASE_TYPE") == "postgresql":
-            if isinstance(v, str):
-                return v
+            # if isinstance(v, str):
+            #     return v
+            print("Print: ", values.get("DATABASE_PASSWORD"))
             return PostgresDsn.build(
                 scheme="postgresql",
                 user=values.get("DATABASE_USER"),
-                password=values.get("DATABASE_PASSWORD"),
+                password=quote(values.get("DATABASE_PASSWORD")),
                 host=values.get("DATABASE_HOST"),
                 path=f"/{values.get('DATABASE_DB') or ''}",
+                port=str(values.get("DATABASE_PORT"))
             )
         return "mysql+pymysql://{0}:{1}@{2}/{3}".format(
             values.get("DATABASE_USER"),

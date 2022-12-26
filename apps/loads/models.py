@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import Column, String, Boolean, TIMESTAMP, func
+from sqlalchemy import Column, String, Boolean, TIMESTAMP, func, BigInteger
 from sqlalchemy_utils import UUIDType
 
 from db.base import Base
@@ -9,7 +9,7 @@ from db.base import Base
 
 class Loads(Base):
     __tablename__ = "loads"
-    load_data_id = Column(UUIDType(binary=False), primary_key=True, default=uuid.uuid4)
+    load_data_id = Column(BigInteger, primary_key=True, autoincrement=True)
     load_id = Column(String(255), nullable=False)
     load_creation_date_time = Column(String(255), nullable=False)
     business_unit = Column(String(255), nullable=False, default="ASSET")
@@ -47,7 +47,7 @@ class Loads(Base):
     )
     pickup_departure_actual_date_time = Column(String(255), nullable=True)
     delivery_departure_actual_date_time = Column(String(255), nullable=True)
-    run_id = Column(String(255), nullable=False)
+    run_data_id = Column(String(255), nullable=False)
     timeoff = Column(String(255), nullable=False)
     type = Column(String(255), nullable=False)
     assigned_driver_id = Column(String(255), nullable=True)

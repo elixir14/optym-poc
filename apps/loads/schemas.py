@@ -1,6 +1,8 @@
 import uuid
 from typing import Optional
 
+from sqlalchemy import BigInteger
+
 from db.schemas import BaseModel
 
 
@@ -38,7 +40,7 @@ class CreateLoadsSchema(BaseModel):
     associated_trip_ids: Optional[str]
     pickup_departure_actual_date_time: Optional[str]
     delivery_departure_actual_date_time: Optional[str]
-    run_id: str
+    run_data_id: str
     timeoff: str
     type: str
     assigned_driver_id: Optional[str]
@@ -51,7 +53,7 @@ class CreateLoadsSchema(BaseModel):
 
 
 class LoadsSchema(BaseModel):
-    load_data_id: uuid.UUID
+    load_data_id: int
     load_id: str
     load_creation_date_time: str
     business_unit: str
@@ -85,7 +87,7 @@ class LoadsSchema(BaseModel):
     associated_trip_ids: Optional[str]
     pickup_departure_actual_date_time: Optional[str]
     delivery_departure_actual_date_time: Optional[str]
-    run_id: str
+    run_data_id: str
     timeoff: str
     type: str
     assigned_driver_id: Optional[str]
