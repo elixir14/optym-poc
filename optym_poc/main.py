@@ -1,6 +1,6 @@
 import logging
-import time
 import uuid
+import time
 from contextvars import ContextVar
 
 from fastapi import FastAPI
@@ -49,11 +49,11 @@ async def generic_exception_handler(request: Request, exc: Exception):
 
 @app.middleware("http")
 async def request_middleware(request, call_next):
-    start_time = time.time()
     request_id = str(uuid.uuid4())
     request_url = str(request.url)
     request_id_contextvar.set(request_id)
     request_method = request.method
+    start_time = time.time()
     logger.info(f"Request started, Method:{request_method}, URL: {request_url}")
     routes = request.app.router.routes
     logger.debug("Request Params:")
@@ -72,11 +72,10 @@ async def request_middleware(request, call_next):
         logger.error(f"Request failed: {ex}")
         raise
     finally:
-        logger.info(
-            "Request Ended, Method:{0}, URL: {1}, Execution time: {2} seconds".format(
-                request_method, request_url, time.time() - start_time
-            )
-        )
+        logger.info("Time took to process the request and return response is {} sec".format(
+            time.time() - start_time
+        ))
+        logger.info(f"Request Ended, Method:{request_method}, URL: {request_url}")
 
 
 @app.on_event("startup")
