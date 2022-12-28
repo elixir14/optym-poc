@@ -41,7 +41,7 @@ async def get_load(id: str, db: Session = Depends(get_db)):
     return load
 
 
-@load_router.put("/{id}")
+@load_router.put("/{id}", response_model=LoadsSchema)
 async def update_load(id: str, payload: CreateLoadsSchema, db: Session = Depends(get_db)):
     logger.info(f"Update load '{id}'")
     load_instance = load_action.get(db=db, id=id)
