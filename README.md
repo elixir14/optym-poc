@@ -38,3 +38,8 @@
 - **Test Application**
 
     `Open swagger URL http://127.0.0.1:5000/docs`
+
+
+- **Running Testcases**
+
+    `$ pytest -v`
