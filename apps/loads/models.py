@@ -1,8 +1,6 @@
-import uuid
 from datetime import datetime
 
 from sqlalchemy import Column, String, Boolean, TIMESTAMP, func, BigInteger
-from sqlalchemy_utils import UUIDType
 
 from db.base import Base
 

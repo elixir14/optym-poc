@@ -1,6 +1,6 @@
 import logging
-import uuid
 import time
+import uuid
 from contextvars import ContextVar
 
 from fastapi import FastAPI
@@ -12,6 +12,7 @@ from starlette.routing import Match
 from apps.loads.api.v1 import load_router
 from optym_poc.core.config import settings
 from optym_poc.core.logs import setup_logging
+from optym_poc.core.services.azure import azure_scheme
 
 logger = logging.getLogger(__name__)
 
@@ -81,6 +82,14 @@ async def request_middleware(request, call_next):
 @app.on_event("startup")
 async def startup_event():
     setup_logging()
+
+
+@app.on_event('startup')
+async def load_config() -> None:
+    """
+    Load OpenID config on startup.
+    """
+    await azure_scheme.openid_config.load_config()
 
 
 app.include_router(load_router)

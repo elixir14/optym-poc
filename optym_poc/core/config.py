@@ -2,7 +2,7 @@
 from typing import Any, Dict, List, Optional, Union
 from urllib.parse import quote
 
-from pydantic import AnyHttpUrl, BaseSettings, PostgresDsn, validator
+from pydantic import AnyHttpUrl, BaseSettings, PostgresDsn, validator, Field
 
 
 class Settings(BaseSettings):
@@ -17,6 +17,10 @@ class Settings(BaseSettings):
     DATABASE_PORT: int = 5432
 
     DATABASE_URI: Optional[str] = None
+
+    OPENAPI_CLIENT_ID: str = Field(default='', env='OPENAPI_CLIENT_ID')
+    APP_CLIENT_ID: str = Field(default='', env='APP_CLIENT_ID')
+    TENANT_ID: str = Field(default='', env='TENANT_ID')
 
     @validator("BACKEND_CORS_ORIGINS", pre=True)
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> Union[List[str], str]:

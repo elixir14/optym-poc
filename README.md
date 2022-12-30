@@ -38,3 +38,8 @@
 - **Test Application**
 
     `Open swagger URL http://127.0.0.1:5000/docs`
+
+
+## Azure configuration link
+    
+    https://intility.github.io/fastapi-azure-auth/single-tenant/azure_setup/
