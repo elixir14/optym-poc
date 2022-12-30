@@ -40,6 +40,11 @@
     `Open swagger URL http://127.0.0.1:5000/docs`
 
 
+- **Running Testcases**
+
+    `$ pytest -v`
+
+
 ## Azure configuration link
     
     https://intility.github.io/fastapi-azure-auth/single-tenant/azure_setup/
