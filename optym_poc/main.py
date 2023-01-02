@@ -18,7 +18,15 @@ logger = logging.getLogger(__name__)
 
 
 def get_application():
-    _app = FastAPI(title=settings.PROJECT_NAME)
+    _app = FastAPI(
+        title=settings.PROJECT_NAME,
+        docs_url="/",
+        swagger_ui_oauth2_redirect_url='/oauth2-redirect',
+        swagger_ui_init_oauth={
+            'usePkceWithAuthorizationCodeGrant': True,
+            'clientId': settings.OPENAPI_CLIENT_ID,
+        },
+    )
 
     _app.add_middleware(
         CORSMiddleware,

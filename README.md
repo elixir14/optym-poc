@@ -32,12 +32,12 @@
 
 - **Run Server**
 
-    `$ uvicorn --reload optym_poc.main:app --host 0.0.0.0 --port 5000`
+    `$ uvicorn --reload optym_poc.main:app --host 0.0.0.0 --port 8007`
 
 
 - **Test Application**
 
-    `Open swagger URL http://127.0.0.1:5000/docs`
+    `Open swagger URL http://localhost:8007`
 
 
 - **Running Testcases**
