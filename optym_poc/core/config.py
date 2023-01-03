@@ -21,6 +21,8 @@ class Settings(BaseSettings):
     OPENAPI_CLIENT_ID: str = Field(default='', env='OPENAPI_CLIENT_ID')
     APP_CLIENT_ID: str = Field(default='', env='APP_CLIENT_ID')
     TENANT_ID: str = Field(default='', env='TENANT_ID')
+    CONNECTION_STRING: str = Field(default='', env='CONNECTION_STRING')
+    QUEUE_NAME: str = Field(default='', env='QUEUE_NAME')
 
     @validator("BACKEND_CORS_ORIGINS", pre=True)
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> Union[List[str], str]:

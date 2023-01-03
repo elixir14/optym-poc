@@ -7,7 +7,9 @@ from sqlalchemy.orm import Session
 from apps.loads.crud import load_action
 from apps.loads.schemas import CreateLoadsSchema, LoadsSchema
 from db.dependencies import get_db
-from optym_poc.core.services.azure import azure_scheme
+from optym_poc.core.config import settings
+from optym_poc.core.services.azure.azure import azure_scheme
+from optym_poc.core.services.azure.message_bus import AzureMessageBus
 
 load_router = APIRouter(prefix="/loads", tags=["Loads"])
 
@@ -57,3 +59,11 @@ async def delete_load(id: str, db: Session = Depends(get_db)):
     load_action.remove(db=db, id=id)
     logger.info(f"Load '{id}' deleted successfully.")
     return "Delete successfully"
+
+
+@load_router.post("/send-message")
+async def send_message(payload: dict):
+    azure_message = AzureMessageBus(
+        connection_str=settings.CONNECTION_STRING, queue_name=settings.QUEUE_NAME
+    )
+    azure_message.send_single_message(event_data=payload)

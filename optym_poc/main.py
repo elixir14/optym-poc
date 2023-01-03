@@ -12,7 +12,7 @@ from starlette.routing import Match
 from apps.loads.api.v1 import load_router
 from optym_poc.core.config import settings
 from optym_poc.core.logs import setup_logging
-from optym_poc.core.services.azure import azure_scheme
+from optym_poc.core.services.azure.azure import azure_scheme
 
 logger = logging.getLogger(__name__)
 
