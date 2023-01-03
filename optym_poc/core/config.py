@@ -21,8 +21,8 @@ class Settings(BaseSettings):
     OPENAPI_CLIENT_ID: str = Field(default='', env='OPENAPI_CLIENT_ID')
     APP_CLIENT_ID: str = Field(default='', env='APP_CLIENT_ID')
     TENANT_ID: str = Field(default='', env='TENANT_ID')
-    CONNECTION_STRING: str = Field(default='', env='CONNECTION_STRING')
-    QUEUE_NAME: str = Field(default='', env='QUEUE_NAME')
+    MESSAGEBUS_CONNECTION_STRING: str = Field(default='', env='MESSAGEBUS_CONNECTION_STRING')
+    MESSAGEBUS_QUEUE_NAME: str = Field(default='', env='MESSAGEBUS_QUEUE_NAME')
 
     @validator("BACKEND_CORS_ORIGINS", pre=True)
     def assemble_cors_origins(cls, v: Union[str, List[str]]) -> Union[List[str], str]:
@@ -35,9 +35,8 @@ class Settings(BaseSettings):
     @validator("DATABASE_URI", pre=True)
     def assemble_db_connection(cls, v: Optional[str], values: Dict[str, Any]) -> Any:
         if values.get("DATABASE_TYPE") == "postgresql":
-            # if isinstance(v, str):
-            #     return v
-            print("Print: ", values.get("DATABASE_PASSWORD"))
+            if isinstance(v, str):
+                return v
             return PostgresDsn.build(
                 scheme="postgresql",
                 user=values.get("DATABASE_USER"),

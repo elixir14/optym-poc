@@ -64,6 +64,7 @@ async def delete_load(id: str, db: Session = Depends(get_db)):
 @load_router.post("/send-message")
 async def send_message(payload: dict):
     azure_message = AzureMessageBus(
-        connection_str=settings.CONNECTION_STRING, queue_name=settings.QUEUE_NAME
+        connection_str=settings.MESSAGEBUS_CONNECTION_STRING,
+        queue_name=settings.MESSAGEBUS_QUEUE_NAME
     )
     azure_message.send_single_message(event_data=payload)
