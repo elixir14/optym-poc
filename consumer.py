@@ -4,6 +4,7 @@ from optym_poc.core.config import settings
 
 
 def read_message():
+    print(settings.MESSAGEBUS_CONNECTION_STRING)
     client = ServiceBusClient.from_connection_string(
         conn_str=settings.MESSAGEBUS_CONNECTION_STRING, logging_enable=True
     )

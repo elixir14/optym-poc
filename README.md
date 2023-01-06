@@ -37,7 +37,15 @@
 
 - **Test Application**
 
-    `Open swagger URL http://localhost:8007`
+    - `Open swagger URL http://127.0.0.1:8007`
+    - `Click Authorize button on right side of top section.`
+    - `Select All scopes on pop-up and click Authorize.`
+    - `Login to AD using your credentials`
+    - *Run APIs*
+      - Expand API
+      - Click `Try it out`
+      - Fill Required Values
+      - Click `Execute`
 
 
 - **Running Testcases**
